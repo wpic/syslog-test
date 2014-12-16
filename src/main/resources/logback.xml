@@ -1,0 +1,27 @@
+<configuration debug="true" scan="true" scanPeriod="10 seconds">
+    <!--
+    Put into your syslog server's /etc/syslog.conf
+    if $programname == 'mycoolapp' then /var/log/mycoolapp/mycoolapp.log
+    -->
+    <!-- http://logback.qos.ch/manual/appenders.html#SyslogAppender -->
+    <appender name="SYSLOG" class="ch.qos.logback.classic.net.SyslogAppender">
+        <syslogHost>auth.wpic-tools.com</syslogHost>
+        <facility>LOCAL0</facility>
+
+        <suffixPattern> mycoolapp:%-10t|%-5p|%c{40}: %m</suffixPattern>
+    </appender>
+
+    <logger name="com.wpic.test.syslog.Main">
+        <level value="debug" />
+    </logger>
+
+    <root>
+        <level value="info" />
+        <appender-ref ref="SYSLOG" />
+        <!--
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="LOGFILE" />
+        -->
+    </root>
+
+</configuration> 
